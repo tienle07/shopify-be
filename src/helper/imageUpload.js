@@ -5,7 +5,7 @@ const { ImageUpload } = require('../models/imageUpload.js');
 router.get(`/`, async (req, res) => {
 
     try {
-    
+
         const imageUploadList = await ImageUpload.find();
 
 
@@ -27,7 +27,7 @@ router.delete('/deleteAllImages', async (req, res) => {
 
     const images = await ImageUpload.find();
     let deletedImage;
-    
+
     if (images.length !== 0) {
         for (image of images) {
             deletedImage = await ImageUpload.findByIdAndDelete(image.id);

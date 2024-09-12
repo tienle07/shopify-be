@@ -477,16 +477,15 @@ router.post(`/create`, async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  productEditId = req.params.id;
-
-  const product = await Product.findById(req.params.id).populate("category");
-
-  if (!product) {
-    res
-      .status(500)
-      .json({ message: "The product with the given ID was not found." });
+  try {
+    const product = await Product.findById(req.params.id).populate("category");
+    if (!product) {
+      return res.status(500).json({ message: "The product with the given ID was not found." });
+    }
+    return res.status(200).send(product);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
-  return res.status(200).send(product);
 });
 
 router.delete("/deleteImage", async (req, res) => {

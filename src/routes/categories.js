@@ -57,7 +57,7 @@ router.post(`/upload`, upload.array("images"), async (req, res) => {
     imagesUploaded = await imagesUploaded.save();
     return res.status(200).json(imagesArr);
   } catch (error) {
-    console.log(error);
+    console.log("Error upload images: " + error);
   }
 });
 
